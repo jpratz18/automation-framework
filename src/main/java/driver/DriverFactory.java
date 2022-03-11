@@ -28,7 +28,7 @@ public class DriverFactory {
                 driver = new ChromeDriver(chromeOptions);
                 break;
             case CHROME_LINUX:
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/chromedriver");
+                System.setProperty("webdriver.chrome.driver", "http://localhost:4444");
                 ChromeOptions chromeLinuxOptions = new ChromeOptions();
                 chromeLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 driver = new ChromeDriver(chromeLinuxOptions);
