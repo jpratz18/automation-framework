@@ -7,9 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -28,10 +31,13 @@ public class DriverFactory {
                 driver = new ChromeDriver(chromeOptions);
                 break;
             case CHROME_LINUX:
-                System.setProperty("webdriver.chrome.driver", "http://localhost:4444");
                 ChromeOptions chromeLinuxOptions = new ChromeOptions();
                 chromeLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                driver = new ChromeDriver(chromeLinuxOptions);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444"), chromeLinuxOptions);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 break;
             case FIREFOX:
                 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/geckodriver.exe");
