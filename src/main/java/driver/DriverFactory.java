@@ -27,11 +27,23 @@ public class DriverFactory {
                 chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 driver = new ChromeDriver(chromeOptions);
                 break;
+            case CHROME_LINUX:
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/chromedriver");
+                ChromeOptions chromeLinuxOptions = new ChromeOptions();
+                chromeLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                driver = new ChromeDriver(chromeLinuxOptions);
+                break;
             case FIREFOX:
                 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/geckodriver.exe");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 driver = new FirefoxDriver(firefoxOptions);
+                break;
+            case FIREFOX_LINUX:
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/geckodriver");
+                FirefoxOptions firefoxLinuxOptions = new FirefoxOptions();
+                firefoxLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                driver = new FirefoxDriver(firefoxLinuxOptions);
                 break;
         }
         driver.manage().window().maximize();
