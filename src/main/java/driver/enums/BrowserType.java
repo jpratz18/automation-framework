@@ -5,7 +5,9 @@ import java.util.Objects;
 public enum BrowserType {
 
     CHROME("chrome"),
-    FIREFOX("firefox");
+    CHROME_LINUX("chrome_linux"),
+    FIREFOX("firefox"),
+    FIREFOX_LINUX("firefox_linux");
 
     private String name;
 
