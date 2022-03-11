@@ -34,7 +34,7 @@ public class DriverFactory {
                 ChromeOptions chromeLinuxOptions = new ChromeOptions();
                 chromeLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 try {
-                    driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444"), chromeLinuxOptions);
+                    driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), chromeLinuxOptions);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
