@@ -49,7 +49,7 @@ public class DriverFactory {
                 FirefoxOptions firefoxLinuxOptions = new FirefoxOptions();
                 firefoxLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 try {
-                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxLinuxOptions);
+                    driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), firefoxLinuxOptions);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
