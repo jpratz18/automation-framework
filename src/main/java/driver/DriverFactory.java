@@ -46,10 +46,13 @@ public class DriverFactory {
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
             case FIREFOX_LINUX:
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/java/driver/drivers/geckodriver");
                 FirefoxOptions firefoxLinuxOptions = new FirefoxOptions();
                 firefoxLinuxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-                driver = new FirefoxDriver(firefoxLinuxOptions);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxLinuxOptions);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         driver.manage().window().maximize();
@@ -69,12 +72,14 @@ public class DriverFactory {
     }
 
     private static BrowserType getBrowserType() {
-        String name = null;
+        String name = System.getProperty("browserType");
         try {
-            Properties properties = new Properties();
-            FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/properties/config.properties");
-            properties.load(file);
-            name = properties.getProperty("browser").toLowerCase().trim();
+            if (Objects.isNull(name) || name.isEmpty()) {
+                Properties properties = new Properties();
+                FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/properties/config.properties");
+                properties.load(file);
+                name = properties.getProperty("browser").toLowerCase().trim();
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
